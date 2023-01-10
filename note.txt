@@ -1,0 +1,56 @@
+FIXME: Nestjs
+nest new <name>
+nest g module <name>
+nest g service <name> --no-spec
+nest g controller <name> --no-spec
+yarn start:dev
+NOTI: 'prettier/prettier': 0,
+
+FIXME: Addon library
+yarn add class-validator class-transformer
+yarn add argon2 
+yarn add @nestjs/config
+yarn add @nestjs/jwt passport-jwt @nestjs/passport passport
+
+FIXME: Testing
+yarn add dotenv dotenv-cli
+yarn add -D pactum
+npx dotenv -e .env.test -- prisma studio
+
+FIXME: Docker
+NOTI: Create container, network,... from "docker compose" file:
+-d: deamon/background mode
+docker compose up -d
+
+NOTI: if you want to start only specified services/container:
+docker compose up dev-database -d
+
+NOTI: Turn off all container
+docker compose down
+
+NOTI: remove container
+docker compose rm dev-database --stop --force --volumes
+
+NOTI: Use on script
+"prisma:dev:deploy": "prisma migrate deploy",
+"db:dev:remove": "docker compose rm dev-database --stop --force --volumes",
+"db:dev:create": "docker compose up dev-database --detach",
+"db:dev:restart": "yarn db:dev:remove && yarn db:dev:create && timeout 5 && yarn prisma:dev:deploy",
+"build": "nest build",
+
+NOTI: check container is running
+docker ps
+docker ps -a    #Get all container running or not
+
+NOTI: Work with docker postgres bash
+docker exec -it dev-database bash
+psql -U <name> -W <db name>
+\dt #list db
+\q #quit
+
+FIXME: Prisma
+yarn add -D prisma
+yarn add @prisma/client
+npx prisma init
+npx prisma migrate dev
+npx prisma studio #view as web
